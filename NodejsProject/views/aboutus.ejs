@@ -1,0 +1,109 @@
+<!DOCTYPE HTML> 
+<html lang="utf-8">
+    
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+      
+        <!-- Custom fonts for this template-->
+        <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+      
+        <!-- Custom styles for this template-->
+        <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+      
+        <title>PetDeal-쉽고 빠른 애완동물 장터-aboutus</title>
+</head>
+
+<body>
+
+    <% include ./header %>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h4>PetDeal에 대한 설명</h4>
+        </div>
+        <div class="card-body">
+            <span style="white-space: pre-line">
+            PetDeal에 대해
+             -기존 중고거래의 부족한 점인 판매자, 구매자의 정보(가능 시간, 위치 등)을 한눈에 파악하기 
+              어렵고 현재 판매 진행중인 상품과 일반 상품의 구별이 힘들다는 점을 개선한 프로젝트입니다
+             
+             -purchase페이지에서 판매자, 구매자 모두 서로의 정보, 판매현황, 반려동물 평균가 등을 손쉽게 볼 수 
+             있습니다
+             
+            -판매 완료된 상품은 자동으로 삭제되어 번거롭게 확인 할 필요가 없습니다.
+            </span>
+        </div>
+
+        <div class="card-header">
+            <h4>간단 사용법</h4>
+        </div>
+        <div class="card-body">
+            <span style="white-space: pre-line">
+                1.거래
+                판매페이지 접근->거래 신청하기 클릭->거래 페이지에서 순서대로 처리
+
+                2.판매 
+                '판매글 작성하기'로 글 작성->'판매 진행상황' 에 구매 요청된 게시글 표시됨->거래 페이지에서 순서대로 처리
+           
+            </span>
+        </div>
+
+        <div class="card-header">
+            <h4>구현 기능</h4>
+          </div>
+          <div class="card-body">
+              <span style="white-space: pre-line">
+                 1.Ajax, Restapi를 사용한 스크랩 기능 구현
+
+                 2.사용자간 상호작용을 통한 거래 처리 로직 구현
+
+                 3.서브 쿼리, 테이블 조인 등을 사용한 전반적인 기능 구현
+
+                 4.세션을 사용한 로그인 처리, 유지
+
+                 5.BootStrap 템플릿 사용한 디자인 처리
+
+                 6.RestApi url pattern을 적용한 url 간결화
+                  
+             
+              </span>
+          </div>
+
+          <div class="card-header">
+            <h4>아쉽게 구현 못한 기능들-추후 추가예정</h4>
+          </div>
+          <div class="card-body">
+              <span style="white-space: pre-line">
+                1. Multer을 이용한 이미지 업로드
+                
+                2.페이징 처리
+
+                3.Controller 영역과 Mapping영역을 분리하지 못함
+
+              </span>
+          </div>
+
+          <div class="card-header">
+            <h4>프로젝트 제작 완료 후 느낀점</h4>
+          </div>
+          <div class="card-body">
+              <span style="white-space: pre-line">
+                Nodejs를 접한 뒤 처음 만들어본 프로젝트이자 제가 지금까지 쌓아온 노하우를 총 동원한 프로젝트입니다.
+                이번 기회에 전반적인 프로젝트 설계 노하우를 훨씬 더 쌓을 수 있었으며 특히 Restapi, ajax를 실제 적용해보고
+                2개의 계정의 상호작용하는 거래 로직 구현 과정에서 많은 것을 배울 수 있었습니다
+                
+                하지만 postgresql을 사용해보고 싶었고 SQL문을 확실히 익혀야겠다는 생각에 Sequelize ORM이 아닌 쿼리를 직접 보내는 
+                방식을 사용하였는데 이것은 아쉬운 점 중 하나로 남게 되었습니다.
+              </span>
+          </div>
+    </div>
+
+    
+    <% include ./footer %>
+</body>
+</html>

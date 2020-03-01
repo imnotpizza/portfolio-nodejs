@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Custom fonts for this template-->
+  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+
+  <title>PetDeal-쉽고 빠른 애완동물 장터</title>
+
+</head>
+
+
+
+
+<body id="page-top">
+
+    <% include ./header %>
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
+         
+          <!-- Page Content -->
+    <div class="container">
+     
+      <!--왼쪽-->
+      <div class="row">
+      <% if(results.length===0){%>
+     
+        <p class="text-center"><h2> 항목이 없습니다</h2></p>
+    
+      <%}else{%>
+
+        <% for (var i = 0; i < results.length; i++) { %>
+          <!--오른쪽-->
+          <div class="col-lg-6 mb-4">
+            <div class="card h-100">
+              <a href="/sale/purchase/<%= results[i].sno %>"><img class="card-img-top" src="/img/<%=results[i].pet_name%>.jpg" alt=""></a>
+              <div class="card-body">
+                <h4 class="card-title">
+                      
+                      <a href="/sale/purchase/<%= results[i].sno %>"><%= results[i].title  %></a>
+                </h4>
+                
+                <%if(results[i].buyer_id!=null){%>
+                  <p class="card-text">구매 신청자 : <%= results[i].buyer_id  %></p>
+                <%}%>
+                
+                <p class="card-text">판매자 : <%= results[i].seller_id  %></p>
+                <p class="card-text">펫 종류 : <%= results[i].pet_name  %></p>
+                <p class="card-text">가격 : <%= results[i].price  %></p>
+                <p class="card-text">등록일자 : <%= results[i].regdate.getMonth()%>월 <%= results[i].regdate.getDate()%>일</p>
+              </div>
+            </div>
+          </div>
+        <% } %>
+
+      <%} %>
+
+
+      
+    </div>
+      
+      
+
+      
+      <!-- /.row -->
+
+      <!-- Pagination -->
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">3</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+        </li>
+      </ul>
+
+    </div>
+<!-- /.container -->
+          
+
+ <% include ./footer %>         
+
+            
+
+
+     
+
+</body>
+
+</html>

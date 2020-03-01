@@ -1,0 +1,177 @@
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+  
+      <!-- Sidebar -->
+      <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+  
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/sale">
+          <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+          </div>
+          <div class="sidebar-brand-text mx-3">PetDeal</div>
+        </a>
+  
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+  
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+        <% if(logcheck==false) { %>
+        <!-- 회원가입 안했을때 -->
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>회원</span>
+          </a>
+       
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="/users/register">회원가입</a>
+                <a class="collapse-item" href="/users/login">로그인</a>
+              </div>
+          </div>
+         
+        </li>
+        <%}else{%>
+
+        
+            <!-- 로그인 성공했을때 -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+              <i class="fas fa-fw fa-cog"></i>
+              <span>회원</span>
+            </a>
+         
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                  <a class="collapse-item" href="/users/logout">로그아웃</a>
+                </div>
+            </div>
+           
+          </li>
+          
+          <!-- Nav Item - Pages Collapse Menu -->
+          <li class="nav-item">
+              <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>판매자 메뉴</span>
+              </a>
+              <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                  <a class="collapse-item" href="/sale/register">판매글 작성하기</a>
+                  <a class="collapse-item" href="/users/reglist">판매 등록한 목록</a>
+                  <a class="collapse-item" href="/users/onprocess">판매 진행상황</a>
+                </div>
+              </div>
+          </li>
+
+          <li class="nav-item">    
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+              <i class="fas fa-fw fa-folder"></i>
+              <span>구매자 메뉴</span>
+            </a>
+            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="/like">스크랩 목록</a>
+                <a class="collapse-item" href="/users/purchased">구매 진행상황</a>
+              </div>
+            </div>
+          </li>
+     
+        
+       
+        <% }%>
+
+        
+     
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+      
+
+
+
+
+
+
+
+
+        <!-- Nav Item - Charts -->
+        <li class="nav-item">
+          <a class="nav-link" href="/sale/aboutus">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>소개</span></a>
+        </li>
+  
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+  
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+          <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+  
+      </ul>
+      <!-- End of Sidebar -->
+  
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+  
+        <!-- Main Content -->
+        <div id="content">
+  
+          <!-- Topbar -->
+          <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+  
+            <!-- Sidebar Toggle (Topbar) -->
+            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+              <i class="fa fa-bars"></i>
+            </button>
+
+
+             <!-- Topbar Search -->
+          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action='/sale/s_bytitle' method='post'>
+              <div class="input-group">
+                <input type="text" class="form-control bg-light border-0 small" name='query' placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-search fa-sm"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+  
+            <!-- Topbar Navbar -->
+            <ul class="navbar-nav ml-auto">
+  
+              <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+              <li class="nav-item dropdown no-arrow d-sm-none">
+                <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-search fa-fw"></i>
+                </a>
+                <!-- Dropdown - Messages -->
+                <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                  <form class="form-inline mr-auto w-100 navbar-search">
+                    <div class="input-group">
+                      <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                      <div class="input-group-append">
+                        <button class="btn btn-primary" type="button">
+                          <i class="fas fa-search fa-sm"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </li>
+  
+              
+            
+  
+              <div class="topbar-divider d-none d-sm-block"></div>
+  
+            </ul>
+  
+          </nav>
+          <!-- 헤더끝 -->
+  

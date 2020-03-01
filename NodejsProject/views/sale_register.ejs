@@ -1,0 +1,137 @@
+<!DOCTYPE HTML> 
+<html lang="utf-8">
+    
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+      
+        <!-- Custom fonts for this template-->
+        <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+      
+        <!-- Custom styles for this template-->
+        <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+      
+        <title>PetDeal-쉽고 빠른 애완동물 장터</title>
+</head>
+
+<body>
+
+    <% include ./header %>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Portfolio Item Heading -->
+         <h1 class="my-4"><br>
+           <small>판매 펫 등록</small>
+          </h1>
+
+            <!-- Portfolio Item Row -->
+            <div class="row">
+    
+                    <div class="card-body">
+                        <h5 class="card-title text-center"></h5>
+                        <form class="form-signin" action='/sale/register' method='post'>
+                        <div class="form-label-group">
+                            <label for="inputEmail">제목</label>
+                            <input type="text" id="inputEmail" name='title' class="form-control"  required autofocus>
+                            
+                        </div>
+                        <div class="form-label-group">
+                                <label for="inputEmail">판매자 아이디</label>
+                            <input type="text" id="inputEmail" readonly name='seller_id' value="<%=sUser%>" class="form-control"  required autofocus>
+                            
+                        </div>
+
+                        <div class="form-label-group">
+                                <label for="inputEmail">펫 이름</label>
+                            <input type="text" id="inputEmail" name='pet_name' class="form-control"  required autofocus>
+                            <p>!! 시추, 아메리칸쇼트헤어, 러시안블루, 시베리안허스키, 치와와 중 하나만 선택 !!</p>
+                        </div>
+
+                        <div class="form-label-group">
+                                <label for="inputEmail">가격</label>
+                            <input type="text" id="inputEmail" name='price' class="form-control"  required autofocus>
+                            
+                        </div>
+
+                        <div class="form-label-group">
+                                <label for="inputEmail">반려동물 등록번호</label>
+                            <input type="text" id="inputEmail" name='petcode' class="form-control"  required autofocus>
+                            
+                        </div>
+
+                        <div class="form-label-group">
+                                <label for="inputEmail">상세내용</label>
+                            <textarea name='comment' id="inputEmail" name='petcode' class="form-control" cols="5" placeholder="필요한 내용만 입력해주세요" required autofocus></textarea>
+                               
+                        </div>
+
+                        <div class="form-label-group">
+                                <label for="inputEmail">썸네일 등록</label><br>
+                            <input type="file"  name='imgpath'  placeholder="jpg, png 파일 업로드" required autofocus>
+                        
+                        </div>
+
+                        
+
+                        <br><br>
+                        <div class="form-label-group">
+                                <label for="inputEmail">펫 상태-건강, 관리상태 등</label>
+                                <select name="status">
+                                    <option value=3>매우좋음</option>
+                                    <option value=2>좋음</option>
+                                    <option value=1>보통</option>
+
+                                </select>
+                        </div>
+
+                        <br><br>
+                        
+                        
+                        <div class="form-label-group">
+                            <input type='submit' class="btn btn-lg btn-primary btn-block text-uppercase"></button>
+                            <hr class="my-4">
+                        </div>
+                        </form>
+                    </div>
+                   
+            </div>
+
+
+
+            </div>
+    
+
+                       
+            
+        
+          
+
+
+
+        </form>
+
+    
+    </div>
+
+
+    
+           
+             
+        
+         
+
+
+
+    
+
+  
+
+    <% include ./footer %>
+</body>
+</html>

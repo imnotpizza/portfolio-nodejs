@@ -1,0 +1,89 @@
+<!DOCTYPE HTML> 
+<html lang="utf-8">
+    
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+      
+        <!-- Custom fonts for this template-->
+        <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+      
+        <!-- Custom styles for this template-->
+        <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+      
+        <title>PetDeal-쉽고 빠른 애완동물 장터</title>
+</head>
+
+<body id="page-top">
+
+    <% include ./header %>
+
+
+    <div class="container">
+            <div class="row">
+              <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                  <div class="card-body">
+                    <h5 class="card-title text-center">회원 가입</h5>
+                    <form class="form-signin" action='/users/register' method='post'>
+
+                      <div class="form-label-group">
+                        <label for="inputEmail">아이디</label>
+                        <input type="text" id="inputEmail" class="form-control" name='id'  required autofocus>
+                      </div>
+                      <br>
+
+                      <div class="form-label-group">
+                            <label for="inputEmail">비밀번호</label>
+                            <input type="password" id="inputPassword" class="form-control" name='password'  required autofocus>
+                      </div>
+                      <br>
+
+                      <div class="form-label-group">
+                            <label for="inputEmail">이름</label>
+                            <input type="text" id="inputEmail" class="form-control" name='name'  required autofocus>
+                          </div>
+                        <br>
+                      <div class="form-label-group">
+                             <label for="inputEmail">이메일</label>
+                            <input type="email" id="inputEmail" class="form-control" name='email' required autofocus>
+                      </div>
+                      <br>
+                       <div class="form-label-group">
+                           <label for="inputEmail">전화번호</label>
+                           <input type="text" id="inputEmail" class="form-control" name='phone' required autofocus>
+                      </div>
+                      <br>
+                     <div class="form-label-group">
+                        <label for="inputEmail">거주하는 지역</label>
+                        <input type="text" id="inputEmail" class="form-control" name='available_loc' required autofocus>
+                      </div>
+                      <br>
+                      
+                         
+                      <label for="inputEmail">거래 가능한 시간</label>
+                        <input type="time" id="inputEmail" class="form-control" name='available_time_from'  required autofocus> 부터
+                        <br>
+                        <input type="time" id="inputEmail" class="form-control" name='available_time_until'  required autofocus> 까지
+                        
+                      </div>
+                      
+                      <br>
+                      <input type="submit" class="btn btn-lg btn-primary btn-block text-uppercase" value="회원가입">
+                      
+                     
+                    </form>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+    <% include ./footer %>
+</body>
+</html>

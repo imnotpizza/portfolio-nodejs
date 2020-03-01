@@ -1,0 +1,195 @@
+
+
+
+
+
+<!DOCTYPE HTML> 
+<html lang="utf-8">
+    
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+      
+        <!-- Custom fonts for this template-->
+        <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+        <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+      
+        <!-- Custom styles for this template-->
+        <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+      
+        <title>PetDeal-쉽고 빠른 애완동물 장터-<%= results.title %></title>
+</head>
+
+<body>
+
+    <% include ./header %>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Portfolio Item Heading -->
+        <h1 class="my-4"><%= results.title %><br>
+          <small>Posted by <%= results.seller_id %></small>
+        </h1>
+
+          
+        <!-- Portfolio Item Row -->
+        <div class="row">
+  
+      
+          <div class="col-md-8">
+            <img class="img-fluid" src="/img/<%= results.pet_name %>.jpg" width="750" height="500" alt="">
+          </div>
+
+          <div class="col-md-4">
+            <h5 class="my-3">펫 상세설명</h5>
+            <p><%= results.comment %></p>
+
+          
+               <!-- ajax, restapi를 통한 like 구현-->
+          <% if(logcheck===true && sid!=results.seller_id){%>
+             
+            <button id="btn123" value="btn" class="btn btn-primary"><%=btChecked%></button>
+            <input type="hidden" value="<%=btChecked%>" id="txts">
+            <p>true : 스크랩, false : 스크랩해제</p>
+        
+          <%}%>
+
+            <hr>
+
+            <h5 class="my-3">펫 정보</h5>
+            <ul>
+              <li>펫 이름 : <%= results.pet_name %></li>
+              <li>반려동물 등록번호 : <%= results.petcode %></li>
+              <li>가격 : <%= results.price %>원</li>
+              <%if(results.status===1){%>
+                  <li>펫 상태 : 보통</li>
+              <%}else if(results.status===2){%>
+                  <li>펫 상태 : 좋음</li>
+              <%}else{%>    
+                  <li>펫 상태 : 매우좋음</li>
+              <%}%>
+              
+            </ul>
+
+            <hr>
+
+            <h5 class="my-3">판매자 정보</h5>
+            <ul>
+              <li>이메일 주소 : <%= results.email %></li>
+              <li>전화번호 : <%= results.phone %></li>
+              <li>거주 지역 : <%= results.available_loc %></li>
+              <li>가능한 시간대 : <%= results.available_time_from %> ~ <%= results.available_time_until %></li>
+              <br>
+              <br>
+              
+              <% if(logcheck==true && sid!=results.seller_id) { %>
+                    <!-- 로그인됐을때 -->
+                    <a href="/sale/purchase/<%= results.sno %>" class="btn btn-secondary btn-icon-split">
+                      <span class="icon text-white-50">
+                        <i class="fas fa-arrow-right"></i>
+                      </span>
+                      <span class="text">거래 신청하기</span>
+                    </a>
+                  </ul>
+                </div>
+                <%}else if(sid==results.seller_id){%>
+                 <!-- 자기글일때 -->
+                 <a href="/sale/modify/<%= results.sno %>" class="btn btn-secondary btn-icon-split">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-arrow-right"></i>
+                  </span>
+                  <span class="text">수정하기</span>
+                </a>
+
+                <a href="/sale/delete/<%= results.sno %>" class="btn btn-danger btn-icon-split">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-arrow-right"></i>
+                  </span>
+                  <span class="text">삭제하기</span>
+                </a>
+              </ul>
+            </div>
+            <%}else{%>
+               <!--방문자일때-->
+               <a href="/users/login" class="btn btn-secondary btn-icon-split">
+                <span class="icon text-white-50">
+                  <i class="fas fa-arrow-right"></i>
+                </span>
+                <span class="text">로그인한 뒤 거래신청</span>
+              </a>
+            </ul>
+          </div>
+            <% }%>
+      
+        </div>
+        <!-- /.row -->
+      
+       
+            
+             
+      
+        </div>
+        <!-- /.row -->
+      
+      </div>
+      <!-- /.container -->
+
+
+    <input type="hidden" id="sno" value="<%= results.sno %>">
+
+
+      <script>
+        var sno=document.getElementById('sno').value;
+        console.log(sno);
+        $('#btn123').on("click", function(){
+                      var bools;//true(추가)-false(삭제)값
+                      var urls;
+                      var val=$('#txts').val();
+                      var type;
+
+                      //value가 true=>post 수행, false로 변경   false=>delete수행, true로 변경
+                      if(val=='true'){
+                          bools='false';
+                          urls="/like/add/"+sno;
+                          types='POST';
+                          $("#btn123").html('false')
+              
+                      }else if(val=='false'){
+                          bools='true';
+                          urls="/like/delete/"+sno;
+                          types='DELETE'
+                          $("#btn123").html('true')
+                      }
+      
+                      //값 바꾸기
+                      document.getElementById("txts").value = bools;
+              
+                  $.ajax({
+                        url: urls,
+                        type: types,
+                        data: {bools : bools},
+                      success: function(data){
+                            console.log('success');
+                      },
+                      error: function(err){
+                              console.log(err);
+                          alert("simpleWithObject err");
+                      }
+                  });
+        });
+      </script>
+     
+
+    
+
+
+  
+
+    <% include ./footer %>
+</body>
+</html>

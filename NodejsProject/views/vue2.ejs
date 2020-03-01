@@ -1,0 +1,63 @@
+<!DOCTYPE HTML> 
+<html lang="utf-8">
+    <head>
+    </head>
+
+    <body>
+        <div id="sender-app">
+            <input v-model="text">
+            <button @click="sender">sender</button>
+            <div v-if="receiveText">#sender-app: I sent a message a {{text}} </div>
+        </div>
+        <div id="receiver-app">
+            <div v-if="text">#receiver-app: {{text}} </div>
+        </div>
+    </body>
+
+    <script src="https://unpkg.com/vue"></script>
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>  
+
+    <script>
+    var EventBus = new Vue();
+//부모
+var SenderApp = new Vue({
+    el: '#sender-app',
+    data() {
+    	return {
+            text: '',
+            receiveText: ''
+        }
+    },
+    created() {
+    	EventBus.$on('message', this.onReceive);
+    },
+    methods: {
+    	sender() {
+            EventBus.$emit('message', this.text);
+            this.text = '';
+        },
+        onReceive(text) {
+            this.receiveText = text;
+        }
+    }
+});
+//자식
+var ReceiverApp = new Vue({
+    el: '#receiver-app',
+    data() {
+    	return {
+            text: ''
+        }
+    },
+    created() {
+    	EventBus.$on('message', this.onReceive);
+    },
+    methods: {
+    	onReceive(text) {
+            this.text = text;
+        }
+    }
+});
+    </script>
+</html>

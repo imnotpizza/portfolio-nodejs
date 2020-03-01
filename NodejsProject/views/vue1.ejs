@@ -1,0 +1,74 @@
+<!DOCTYPE HTML> 
+<html lang="utf-8">
+    
+    <head>
+    </head>
+    <body>
+        
+    <div id="app">
+        <h3>app123</h3>
+        <div v-if="mode==='list'">
+            <ul>
+                <li v-for="m in memos">{{m.content}}</li>
+            </ul>
+        </div>
+        <div v-else>
+            <p>작성</p>
+            <textarea cols="30" rows="5" v-model="memo.content"></textarea><br>
+            <button type="button" v-on:click="save()">저장</button>
+        </div>
+        <button type="button" v-on:click="write()" v-if="mode==='list'">add memo</button>
+    </div>
+
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+      var app=new Vue({
+          el: '#app',
+          data: {
+              mode: 'list',
+              memo: {
+                  id: null,
+                  content: null,
+                  regDate: null
+              },
+              memos: [
+                  {
+                      id: 1,
+                      content: '메모1',
+                      regDate: new Date()
+                  },
+                  {
+                      id: 2,
+                      content: '메모2',
+                      regDate: new Date()
+                  },
+                  {
+                      id: 3,
+                      content: '메모3',
+                      regDate: new Date()
+                  }
+              ]
+          },
+          methods: {
+              write: function(){
+                  this.mode='write'
+              },
+              cancel: function(){
+                  this.mode='list'
+              },
+              save: function(){
+                    console.log(this.memo.content)
+                  this.memos.push({
+                      id: this.memos.length+1,
+                      content: this.memo.content,
+                      regDate: new Date()
+                  })
+                  this.memo.content=null
+                  this.mode='list'
+              }
+          }
+      })
+    </script>
+    </body>
+
+</html>
