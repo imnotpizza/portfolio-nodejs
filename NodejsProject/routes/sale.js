@@ -7,7 +7,7 @@ const client = new Pool({
       //host: "database-2.ct6erzhsvszz.ap-northeast-2.rds.amazonaws.com",
       host: "petdeal-db.ckaysdqxrb6e.ap-northeast-2.rds.amazonaws.com",
       //host: "localhost",
-      database: "petdeal-service",
+      database: "postgres",
       password: "freesoul1712",
       multipleStatements: true,
       port: 5432

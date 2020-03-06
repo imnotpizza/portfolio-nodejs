@@ -33,12 +33,12 @@ function logcheck(req){
 // for connection information
 
 const client = new Pool({
-      user: "postgres",
-      host: "localhost",
-      database: "petdeal",
-      password: "happy1717",
-      multipleStatements: true,
-      port: 5432
+  user: "postgres",
+  host: "petdeal-db.ckaysdqxrb6e.ap-northeast-2.rds.amazonaws.com",
+  database: "postgres",
+  password: "freesoul1712",
+  multipleStatements: true,
+  port: 5432
 })
 
 router.get('/register', function(req, res, next) {
