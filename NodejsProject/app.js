@@ -11,7 +11,7 @@ const usersRouter = require("./routes/users");
 const saleRouter = require("./routes/sale");
 const likeRouter = require("./routes/like");
 const apiRouter = require("./routes/naverMovieApi");
-const cors = require('cors')
+const cors = require('cors');
 
 const flash = require("connect-flash");
 const app = express();

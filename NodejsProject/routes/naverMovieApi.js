@@ -143,41 +143,23 @@ router.use(bodyParser.urlencoded({ extended: false }));
 router.post("/movie", async (req, res)=>{
 
   try{
-
-    const request=req.body;
+   
+    const request=req.query;
+    
    
     const naverApiRes=await fetchMovieData(request);
     
     return res.json(naverApiRes.data.items);
     
   }catch(e){
-    console.log("ERR");
+    console.log(e);
     res.status(500).send("INTERNAL SERVER ERROR")
   }
 })
 
-//영화 상세보기 api
-router.get("/movie/:code", async (req, res)=>{
-  try{
-
-    const htmlData = await axios.get(MOVIE_DETAIL_PATH, {
-      headers: {
-        "User-Agent":
-          "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.99 Safari/537.36"
-      }
-    });
-    
-    const $=cheerio.load(htmlData.data);
-
-  }catch(e){
-    res.status(500).send("INTERNAL SERVER ERROR");
-  }
-  
-})
-
 //NAVER MOVIE API
 const fetchMovieData=(queryObj)=>{
-
+  
   queryObj.query = encodeURI(queryObj.query);
 
 
@@ -189,7 +171,6 @@ const fetchMovieData=(queryObj)=>{
     }
   }
 
-  makeQueryStr(queryObj)
 
   return axios.get(API_PATH+'?query=' + queryObj.query, naverToken );
   
@@ -197,35 +178,6 @@ const fetchMovieData=(queryObj)=>{
       
 }
 
-//쿼리객체를 이용하여 쿼리파라미터 문자열 생성
-const makeQueryStr=(queryObj)=>{
-
-  let path = '';
-  const keys = Object.keys(queryObj);
-
-  //쿼리객체 키 배열 순환 
-  for (let key of keys) {
-    let _title = key;
-    let _value = queryObj[key];
-
-    if (_value === '' || _value === null) { continue; }// 입력되지 않은경우 pass
-
-    //첫번째 파라미터인경우 : ?추가 , 아니면 &추가
-    if (path.length === 0) {
-      path += `?${_title}=${_value}`;
-
-    } else {
-      path += `&${_title}=${_value}`;
-
-    }
-
-  }
-
-
-  console.log(path)
-  return path;
-  
-}
 
 
 module.exports = router;
