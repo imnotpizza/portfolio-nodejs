@@ -10,7 +10,7 @@ const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const saleRouter = require("./routes/sale");
 const likeRouter = require("./routes/like");
-const apiRouter = require("./routes/naverMovieApi");
+const apiRouter = require("./routes/nypostNewsApi");
 const cors = require('cors');
 
 const flash = require("connect-flash");

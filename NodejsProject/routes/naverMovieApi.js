@@ -4,12 +4,16 @@ const bodyParser = require("body-parser");
 const request=require('request');
 const axios = require("axios");
 const cheerio = require('cheerio');
+const { Pool, Client } = require('pg')
 
 
 const CLIENT_ID = "n0_0KcWBhI6j6VZH62xB";
 const CLIENT_SERCRET = "aaTUtodscb";
 const API_PATH = "https://openapi.naver.com/v1/search/movie.json";
 const MOVIE_DETAIL_PATH = "https://movie.naver.com/movie/bi/mi/basic.nhn?code=70254";
+
+const NYTIMES_BASEURL="https://api.nytimes.com/svc/search/v2/articlesearch.json"
+const NYTIMES_API_KEY="5VssiK3hP68Qy7jyVV3aJ7vuU3uNSIYh"
 
 const tempItems = [
   {
@@ -126,6 +130,16 @@ const tempItems = [
   }
 ];
 
+const client = new Pool({
+  user: "postgres",
+  host: "petdeal-db.ckaysdqxrb6e.ap-northeast-2.rds.amazonaws.com",
+  database: "postgres",
+  password: "freesoul1712",
+  multipleStatements: true,
+  port: 5432
+})
+
+
 router.use(bodyParser.urlencoded({ extended: false }));
 
 
@@ -174,9 +188,101 @@ const fetchMovieData=(queryObj)=>{
 
   return axios.get(API_PATH+'?query=' + queryObj.query, naverToken );
   
- 
-      
 }
+
+const fetchNewsData=(query)=>{
+
+  query='questions';
+
+  const apiPath=`${NYTIMES_BASEURL}?api-key=${NYTIMES_API_KEY}&q=${query}`;
+
+  return axios.get(apiPath)
+  .then(response=>{
+    return response.data.response.docs;
+  })
+  .catch(e=>{
+    console.log(e)
+  })
+  
+}
+
+router.post("/getlist", async(req, res)=>{
+  try{
+    console.log(req.query)
+    const response=await fetchNewsData(req.query);
+    console.log("response-", response);
+
+  }catch(e){
+    console.log(e)
+  }
+})
+
+//스크랩 추가
+router.post("/scrap", (req, res)=>{
+  try{
+
+   console.log(req.body)
+  let queryStr='INSERT INTO mylovemovie VALUES($1, $2, $3, $4, $5 ,$6 ,$7, $8, $9)';
+
+  const params=[
+    req.body.id,
+    req.body.title,
+    req.body.link,
+    req.body.image,
+    req.body.subtitle,
+    req.body.pubDate,
+    req.body.director,
+    req.body.actor,
+    req.body.userRating,
+  ];
+
+  client.query(queryStr, params, (err, result)=>{
+
+  
+    if(err){
+      console.log(err.stack);
+      console.log(result);
+    }
+  })
+
+}catch(e){
+  console.log(e)
+}
+
+})
+
+//리스트 호출
+router.get("/scrap", (req, res)=>{
+  const queryStr='SELECT * FROM mylovemovie';
+
+  client.query(queryStr, (err, result)=>{
+    return res.json(result);
+  })
+})
+
+
+
+
+
+//삭제
+router.delete("/scrap/:id", (req, res)=>{
+
+  try{
+    console.log(req.params.id)
+  
+    const queryStr='DELETE FROM mylovemovie WHERE "ID"=$1';
+
+    const param=[req.params.id];
+
+    client.query(queryStr, param, (err, result)=>{
+      console.log(result)
+      return res.json(result);
+    })
+
+  }catch(e){
+    console.log(e)
+  }
+})
 
 
 
