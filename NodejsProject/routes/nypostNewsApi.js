@@ -30,7 +30,7 @@ router.use(bodyParser.urlencoded({ extended: false }));
 router.post("/search", async (req, res) => {
   try {
     //const scrapList=await fetchScrapData(); - 스크랩 되었는지 판별 후 반환
-
+    console.log("### page search : "+req.query.query);
     const response = await fetchNewsData(req.query.query, req.query.pageNum);
     
     return res.json(response);
